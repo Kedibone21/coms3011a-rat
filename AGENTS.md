@@ -17,6 +17,9 @@ agent should re-orient from.
   Merge commits are excluded everywhere.
 - Commit sets: `all`, `since t` (t ≤ committer time), `[i, j)` half-open, manual sha list.
   Membership uses the committer timestamp (`%ct`), not author time.
+- Membership of a commit set: a path is present when its stats row's commit is in H,
+  or when that commit's parent is in H (H plus its direct children). Zero-delta members
+  still appear as all-zero rows (rename pairs; files first touched just after H).
 - Per commit h vs its parent (root commit diffs against the empty tree — `git log --root`):
   added = l+ , removed = l− , growth δ = l+ − l− , churn λ = l+ + l−.
 - Directory metrics are recursive sums of their descendants; repository metrics are the
@@ -56,6 +59,8 @@ agent should re-orient from.
 - Backend: stdlib `sqlite3` (no ORM), no per-commit git subprocesses, batched inserts.
 - Frontend: function components + hooks; charts via ECharts; filter state lives in the URL.
 - Tests in `tests/` (pytest); `scripts/verify.py` diffs engine output against `reference/*.csv`.
+  `tests/golden/tiny_all.csv` is the byte-exact regression lock for the tiny fixture
+  (regenerate only via `scripts/make_golden.py` after re-running verify.py).
 
 ## Common commands
 

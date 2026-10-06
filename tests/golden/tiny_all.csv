@@ -1,0 +1,15 @@
+repo,ref_sha,commit_set,commit_count,object_type,path,author,added,removed,growth,churn,modifications,modification_frequency,churn_rate,ownership
+tiny,85bf45995eee4f96dd2084bb4c9f372c33897be6,all,5,repository,/,ALL,7,0,7,7,3,0.6000000000000001,1.4000000000000001,
+tiny,85bf45995eee4f96dd2084bb4c9f372c33897be6,all,5,repository,/,Alice <alice@example.com>,6,0,6,6,2,,,0.8571428571428571
+tiny,85bf45995eee4f96dd2084bb4c9f372c33897be6,all,5,repository,/,Bob <bob@example.com>,1,0,1,1,1,,,0.14285714285714285
+tiny,85bf45995eee4f96dd2084bb4c9f372c33897be6,all,5,directory,dir,ALL,3,0,3,3,3,0.6000000000000001,0.6000000000000001,
+tiny,85bf45995eee4f96dd2084bb4c9f372c33897be6,all,5,directory,dir,Alice <alice@example.com>,2,0,2,2,2,,,0.6666666666666666
+tiny,85bf45995eee4f96dd2084bb4c9f372c33897be6,all,5,directory,dir,Bob <bob@example.com>,1,0,1,1,1,,,0.3333333333333333
+tiny,85bf45995eee4f96dd2084bb4c9f372c33897be6,all,5,file,a.txt,ALL,4,0,4,4,2,0.4,0.8,
+tiny,85bf45995eee4f96dd2084bb4c9f372c33897be6,all,5,file,a.txt,Alice <alice@example.com>,4,0,4,4,2,,,1.0
+tiny,85bf45995eee4f96dd2084bb4c9f372c33897be6,all,5,file,dir/b.txt,ALL,2,0,2,2,2,0.4,0.4,
+tiny,85bf45995eee4f96dd2084bb4c9f372c33897be6,all,5,file,dir/b.txt,Alice <alice@example.com>,1,0,1,1,1,,,0.5
+tiny,85bf45995eee4f96dd2084bb4c9f372c33897be6,all,5,file,dir/b.txt,Bob <bob@example.com>,1,0,1,1,1,,,0.5
+tiny,85bf45995eee4f96dd2084bb4c9f372c33897be6,all,5,file,dir/c.txt,ALL,1,0,1,1,1,0.2,0.2,
+tiny,85bf45995eee4f96dd2084bb4c9f372c33897be6,all,5,file,dir/c.txt,Alice <alice@example.com>,1,0,1,1,1,,,1.0
+tiny,85bf45995eee4f96dd2084bb4c9f372c33897be6,all,5,file,dir/c2.txt,ALL,0,0,0,0,0,0.0,0.0,

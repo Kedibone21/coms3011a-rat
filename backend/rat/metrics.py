@@ -12,9 +12,10 @@ Row model (matches the reference CSV):
 - "ALL" rows carry added/removed/growth/churn/modifications + both rates.
 - per-author rows carry their own added/removed/growth/churn/modifications +
   ownership; modification_frequency/churn_rate stay empty on those rows.
-- Membership: every path touched by a commit in the set, or by a parent of a
-  commit in the set, is a member even if it has no deltas inside the set
-  (pure renames leave all-zero rows behind). The root object always exists.
+- Membership: a path is a member when it appears in the file stats of a commit
+  h in the set, or of a commit whose parent is in the set (H plus its direct
+  children). Members appear even with no deltas inside the set (pure renames,
+  files first touched just after the set). The root object always exists.
 - Deltas land on the path as named at that commit; renames move nothing
   retroactively.
 - |H| (commit_count) counts every commit in the set, empty commits included.
@@ -182,7 +183,7 @@ def compute_rows(
 
     eff_expr = "COALESCE(am.target_author_id, c.author_id)"
 
-    # ---- membership: paths touched by H or by parents(H) --------------------
+    # ---- membership: rows of H and of commits whose parent is in H ----------
     mp: dict = {"repo": repo_id}
     cf = _commit_filter(cs, "c", mp)
     pf = _commit_filter(cs, "p", mp)
