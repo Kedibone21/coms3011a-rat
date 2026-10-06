@@ -10,7 +10,11 @@ Built for COMS3011A. Metric semantics follow the test specification exactly — 
 
 ## Quick start
 
+No credentials or configuration are needed — the repository is public.
+
 ```bash
+git clone https://github.com/Kedibone21/coms3011a-rat.git
+cd coms3011a-rat
 ./start.sh
 ```
 
@@ -59,3 +63,4 @@ the engine, and diffs the computed metrics against the CSV
 - `scripts/` — verification and tooling
 - `tests/` — engine unit tests and calibration fixtures
 - `reference/` — provided reference metric CSVs
+
