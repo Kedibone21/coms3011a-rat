@@ -76,3 +76,6 @@ agent should re-orient from.
 - `cd frontend && npm run build` — rebuild `frontend/dist` (commit it whenever the UI changes)
 - `.venv/bin/python -m pytest tests -q`
 - `.venv/bin/python scripts/verify.py` (clones cJSON/redis/git — slow the first time)
+- `.venv/bin/python scripts/e2e_check.py --clone https://github.com/DaveGamble/cJSON.git` —
+  live HTTP end-to-end check against a running server (zip ingest, byte-exact export, merge
+  reversibility, clone ingest); leaves the created repos in the DB as a multi-repo demo
