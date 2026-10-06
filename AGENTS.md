@@ -8,7 +8,9 @@ agent should re-orient from.
 - `backend/rat/ingest.py` — parses git history into SQLite in one pass (no per-commit subprocesses).
 - `backend/rat/metrics.py` — all metric aggregation (SQL + light Python rollups).
 - `backend/rat/api.py` — FastAPI endpoints; also serves the built SPA from `frontend/dist`.
-- `frontend/` — React + TypeScript + ECharts. No UI frameworks; CSS custom properties.
+- `frontend/` — React 18 + TypeScript + Vite 5 + ECharts SPA (no UI frameworks; CSS custom
+  properties). Built to `frontend/dist`, which is committed so `api.py` serves it even where
+  npm is unavailable.
 - SQLite file at `data/rat.db`; cloned/extracted repositories under `data/repos/<id>/`.
 
 ## Metric semantics (must match the spec exactly)
@@ -57,13 +59,20 @@ agent should re-orient from.
 ## Conventions
 
 - Backend: stdlib `sqlite3` (no ORM), no per-commit git subprocesses, batched inserts.
-- Frontend: function components + hooks; charts via ECharts; filter state lives in the URL.
+- Frontend: function components + hooks; charts via ECharts; shareable state (repo, commit
+  set, path scope, author ids) lives in the URL hash. Metrics are fetched once per filter
+  change and dir/file navigation is client-side; the path scope is only sent to the export
+  and scoped-query APIs. Views: Overview (cards + charts), Metrics (drill-down table with
+  per-author expansion), Authors (merge/unmerge panel).
 - Tests in `tests/` (pytest); `scripts/verify.py` diffs engine output against `reference/*.csv`.
   `tests/golden/tiny_all.csv` is the byte-exact regression lock for the tiny fixture
   (regenerate only via `scripts/make_golden.py` after re-running verify.py).
 
 ## Common commands
 
-- `./start.sh` — set up + serve on :8000
+- `./start.sh` — set up + serve on :8000 (builds the frontend when npm exists, else uses
+  committed `frontend/dist`)
+- `cd frontend && npm run dev` — Vite dev server on :5173 (proxies /api to :8000)
+- `cd frontend && npm run build` — rebuild `frontend/dist` (commit it whenever the UI changes)
 - `.venv/bin/python -m pytest tests -q`
 - `.venv/bin/python scripts/verify.py` (clones cJSON/redis/git — slow the first time)

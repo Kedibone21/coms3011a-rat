@@ -55,7 +55,14 @@ def _upload_and_wait(client, tiny_repo, tmp_path, name="tiny"):
 def test_health_and_empty_list(client):
     assert client.get("/api/health").json() == {"ok": True}
     assert client.get("/api/repos").json() == []
-    assert client.get("/").json()["name"] == "Repo Analysis Tool API"
+    # "/" serves the built SPA when frontend/dist exists, else a JSON hint.
+    root = client.get("/")
+    assert root.status_code == 200
+    ctype = root.headers["content-type"]
+    if ctype.startswith("application/json"):
+        assert root.json()["name"] == "Repo Analysis Tool API"
+    else:
+        assert ctype.startswith("text/html")
 
 
 def test_unknown_repo_returns_404(client):
