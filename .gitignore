@@ -1,0 +1,18 @@
+# runtime data (databases, cloned/extracted repositories)
+data/
+
+# python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# frontend
+node_modules/
+
+# os / editors
+.DS_Store
+*.log
+
+# agent / IDE local metadata
+.qoder/
